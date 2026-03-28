@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>PubMed2ExcelDownloader</title>
+<style>
+  :root {
+    --bg:           #f7f6f3;
+    --surface:      #ffffff;
+    --surface-alt:  #edecea;
+    --border:       #d8d5cf;
+    --text:         #2c2a25;
+    --text-muted:   #78756e;
+    --accent:       #1a6b4e;
+    --accent-light: #e8f5ee;
+    --accent-hover: #145a40;
+    --blue:         #2563b4;
+    --blue-hover:   #1d4f94;
+    --danger:       #c0392b;
+    --warn-bg:      #fef9e7;
+    --warn-color:   #8a6d00;
+    --warn-border:  #d4ac0d;
+    --radius:       8px;
+    --shadow-sm:    0 1px 3px rgba(0,0,0,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    width: 360px;
+    min-height: 100px;
+  }
+
+  /* ── ヘッダー ── */
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  header svg { flex-shrink: 0; }
+
+  /* ── ステータスエリア（エラー/ローディング用） ── */
+  #status-area {
+    padding: 20px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  #status-area.loading { color: var(--text-muted); }
+
+  #status-area.error {
+    color: var(--danger);
+    background: #fdecea;
+    border-left: 3px solid var(--danger);
+  }
+
+  /* ── メインエリア ── */
+  #main-area { padding: 0 0 4px; }
+
+  .section {
+    padding: 7px 14px 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+
+  /* ── スコープ選択 ── */
+  .radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    padding: 4px 7px;
+    border-radius: 6px;
+    transition: background 0.1s;
+  }
+
+  .radio-group label:hover { background: var(--surface-alt); }
+
+  .radio-group label.disabled {
+    opacity: 0.4;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .count-badge {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+
+  .scope-count-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  #scope-count-input {
+    width: 68px;
+    padding: 3px 6px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 12px;
+    font-family: inherit;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  #scope-count-input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+
+  /* ── フィールド選択 ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .btn-group { display: flex; gap: 6px; }
+
+  .btn-xs {
+    padding: 3px 8px;
+    font-size: 11px;
+    font-family: inherit;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.15s;
+  }
+
+  .btn-xs:hover { background: var(--surface-alt); }
+
+  .fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+  }
+
+  .field-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.1s;
+  }
+
+  .field-toggle:hover { background: var(--surface-alt); }
+
+  .field-toggle input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 13px;
+    height: 13px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .field-tag {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0 4px;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ── 出力形式 ── */
+  .format-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .format-row label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  #encoding {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 3px 6px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--text);
+    margin-left: 4px;
+  }
+
+  /* ── ダウンロードボタン ── */
+  .download-section {
+    padding: 7px 14px 2px;
+  }
+
+  #download-btn {
+    width: 100%;
+    padding: 8px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  #download-btn:hover:not(:disabled) {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  #download-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  /* ── 進捗 ── */
+  #progress-area {
+    padding: 8px 14px 6px;
+    border-top: 1px solid var(--border);
+  }
+
+  .progress-bar-wrap {
+    height: 5px;
+    background: var(--surface-alt);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  #progress-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .progress-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #progress-text { font-size: 12px; color: var(--text-muted); }
+
+  #cancel-btn {
+    padding: 3px 8px;
+    font-size: 11px;
+    font-family: inherit;
+    border: 1px solid var(--danger);
+    border-radius: 5px;
+    background: #fff;
+    color: var(--danger);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  #cancel-btn:hover { background: #fdecea; }
+
+  .progress-note {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  /* ── 結果メッセージ ── */
+  #result-area {
+    margin: 6px 14px 6px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  #result-area.success {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  #result-area.warn {
+    background: var(--warn-bg);
+    color: var(--warn-color);
+    border: 1px solid var(--warn-border);
+  }
+
+  #result-area.error {
+    background: #fdecea;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="9" y1="13" x2="15" y2="13"/>
+    <line x1="9" y1="17" x2="13" y2="17"/>
+  </svg>
+  PubMed2ExcelDownloader
+</header>
+
+<!-- ステータスエリア（初期表示 / エラー） -->
+<div id="status-area" class="loading">読み込み中...</div>
+
+<!-- メインエリア（正常時） -->
+<div id="main-area" style="display:none;">
+
+  <!-- 取得対象 -->
+  <div class="section">
+    <div class="section-title">取得対象</div>
+    <div class="radio-group">
+      <label>
+        <input type="radio" name="scope" value="all" id="scope-all" checked>
+        全件 <span class="count-badge" id="label-all"></span>
+      </label>
+      <label id="label-checked-wrap">
+        <input type="radio" name="scope" value="checked" id="scope-checked">
+        チェック済 <span class="count-badge" id="label-checked"></span>
+      </label>
+      <label id="label-page-wrap">
+        <input type="radio" name="scope" value="page" id="scope-page">
+        現在のページ <span class="count-badge" id="label-page"></span>
+      </label>
+      <label>
+        <input type="radio" name="scope" value="count" id="scope-count">
+        <span class="scope-count-wrap">
+          上位
+          <input type="number" id="scope-count-input" min="1" placeholder="件数" value="100">
+          件
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <!-- 出力フィールド -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title" style="margin-bottom:0;">出力フィールド</div>
+      <div class="btn-group">
+        <button class="btn-xs" id="select-all-btn">全選択</button>
+        <button class="btn-xs" id="reset-default-btn">初期値</button>
+      </div>
+    </div>
+    <div class="fields-grid" id="fields-grid"></div>
+  </div>
+
+  <!-- 出力形式 -->
+  <div class="section">
+    <div class="section-title">出力形式</div>
+    <div class="format-row">
+      <label><input type="radio" name="format" value="xlsx" id="format-xlsx" checked> Excel (.xlsx)</label>
+      <label><input type="radio" name="format" value="csv" id="format-csv"> CSV (.csv)<select id="encoding">
+          <option value="utf8bom" selected>BOM付き</option>
+          <option value="utf8">BOMなし</option>
+        </select></label>
+    </div>
+  </div>
+
+  <!-- ダウンロードボタン -->
+  <div class="download-section">
+    <button id="download-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="8 17 12 21 16 17"/>
+        <line x1="12" y1="12" x2="12" y2="21"/>
+        <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>
+      </svg>
+      ダウンロード
+    </button>
+  </div>
+
+  <!-- 進捗 -->
+  <div id="progress-area" style="display:none;">
+    <div class="progress-bar-wrap">
+      <div id="progress-bar"></div>
+    </div>
+    <div class="progress-footer">
+      <span id="progress-text">取得中...</span>
+      <button id="cancel-btn">キャンセル</button>
+    </div>
+    <p class="progress-note">取得中はこのウィンドウを閉じないでください</p>
+  </div>
+
+  <!-- 結果メッセージ -->
+  <div id="result-area" style="display:none;"></div>
+
+</div><!-- /#main-area -->
+
+<script src="lib/xlsx.full.min.js"></script>
+<script src="pubmed-core.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
