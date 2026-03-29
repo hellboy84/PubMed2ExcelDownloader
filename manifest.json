@@ -15,8 +15,10 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "48":  "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16":  "icons/p2e_16pix.png",
+      "32":  "icons/p2e_32pix.png",
+      "48":  "icons/p2e_48pix.png",
+      "128": "icons/p2e_128pix.png"
     },
     "default_title": "PubMed2ExcelDownloader"
   },
@@ -26,8 +28,10 @@
   },
 
   "icons": {
-    "48":  "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16":  "icons/p2e_16pix.png",
+    "32":  "icons/p2e_32pix.png",
+    "48":  "icons/p2e_48pix.png",
+    "128": "icons/p2e_128pix.png"
   },
 
   "browser_specific_settings": {
