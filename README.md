@@ -16,6 +16,8 @@ PubMed の検索結果の一覧ページからボタン1つでファイルをダ
 - Excel（.xlsx）または CSV（.csv）で出力
 - 出力するフィールドを選択できる
 
+<img width="800" alt="スクショmage" src="https://github.com/user-attachments/assets/071eaaf2-92b1-4d4a-ae5f-b5eac243fb72" />
+
 ---
 ## 公式ストア版のインストール方法
 
