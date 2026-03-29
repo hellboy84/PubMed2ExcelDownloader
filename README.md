@@ -23,7 +23,7 @@ PubMed の検索結果の一覧ページからボタン1つでファイルをダ
 
 ### Chrome：持続的
 
-1. このページの **Releases** から最新の `PubMed2ExcelDownloader_vX.X.X.zip` をダウンロード
+1. このページの **Releases** から最新(latest)の `Source code (zip)` をダウンロード
 2. ZIP を展開する
 3. Chrome で `chrome://extensions/` を開く
 4. 右上の「デベロッパーモード」をオンにする
@@ -31,9 +31,10 @@ PubMed の検索結果の一覧ページからボタン1つでファイルをダ
 
 ### Firefox：一時的(ブラウザの再起動で消える)
 
-1. このページの **Releases** から最新の `PubMed2ExcelDownloader_vX.X.X.zip` をダウンロード
-2. Firefox で `about:debugging#/runtime/this-firefox` を開く
-3. 「一時的なアドオンを読み込む」をクリックし、ダウンロードしたzipをを選択する
+1. このページの **Releases** から最新(latest)の `Source code (zip)` をダウンロード
+2. ZIP を展開する
+3. Firefox で `about:debugging#/runtime/this-firefox` を開く
+4. 「一時的なアドオンを読み込む」をクリックし、展開したフォルダ内の `manifest.json` を選択する
 
 ---
 
