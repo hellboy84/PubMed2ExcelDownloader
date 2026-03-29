@@ -3,7 +3,9 @@
 **PubMed 検索結果を Excel/CSV でダウンロードするブラウザ拡張機能です。**
 PubMed の検索結果の一覧ページからボタン1つでファイルをダウンロードできます。
 
-> **ファイルをPubMedからダウンロードして変換する HTML ツール版はこちら →** [PubMed2ExcelConverter](https://github.com/hellboy84/PubMed2ExcelConverter)
+**PubMed search results downloader**: export bibliographic data (title, authors, journal, abstract, etc.) to Excel (.xlsx) or CSV with one click.
+
+> **ファイルをPubMedからダウンロードして変換する HTML ツール版はこちら(HTML tool Version is here) →** [PubMed2ExcelConverter](https://github.com/hellboy84/PubMed2ExcelConverter)
 
 ---
 

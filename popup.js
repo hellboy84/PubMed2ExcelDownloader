@@ -293,7 +293,7 @@ function buildBaseParams() {
   return new URLSearchParams({
     db:    'pubmed',
     tool:  'pubmed2exceldownloader',
-    email: '8voldenuit4@gmailcom',
+    email: '8voldenuit4@gmail.com',
   });
 }
 
