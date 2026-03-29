@@ -23,10 +23,6 @@
     "default_title": "PubMed2ExcelDownloader"
   },
 
-  "background": {
-    "service_worker": "background.js"
-  },
-
   "icons": {
     "16":  "icons/p2e_16pix.png",
     "32":  "icons/p2e_32pix.png",
