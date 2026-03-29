@@ -120,9 +120,16 @@ function buildFieldsGrid() {
     const label = document.createElement('label');
     label.className = 'field-toggle';
     const tag = f.filter ? f.tag + '[' + f.filter + ']' : f.tag;
-    label.innerHTML =
-      `<input type="checkbox" data-key="${f.key}" ${f.checked ? 'checked' : ''}> ` +
-      `${f.label} <span class="field-tag">${tag}</span>`;
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.dataset.key = f.key;
+    cb.checked = !!f.checked;
+    const tagSpan = document.createElement('span');
+    tagSpan.className = 'field-tag';
+    tagSpan.textContent = tag;
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(' ' + f.label + ' '));
+    label.appendChild(tagSpan);
     fieldsGrid.appendChild(label);
   });
 }
