@@ -216,7 +216,7 @@ downloadBtn.addEventListener('click', async () => {
     const minEst = Math.ceil((targetCount / 500) * 0.334 / 60);
     const confirmed = window.confirm(
       targetCount.toLocaleString() + '件のデータを取得します。\n' +
-      '取得に時間がかかります（目安: ' + minEst + '分以上）。\n' +
+      '取得に時間がかかります（目安: ' + minEst + '分前後）。\n' +
       '取得中はこのウィンドウを閉じないでください。\n\n続行しますか？'
     );
     if (!confirmed) return;
