@@ -88,6 +88,11 @@ PubMed の検索結果の一覧ページからボタン1つでファイルをダ
 
 ---
 
+## プライバシーポリシー
+
+- 本拡張機能は、個人を特定できる情報を収集・使用・送信しません。
+- そのほか詳細は[PRIVACY_POLICY.md](https://github.com/hellboy84/PubMed2ExcelDownloader/blob/main/PRIVACY_POLICY.md) を御覧ください。
+
 ## AI 利用
 
 このツールの作成は AI によるコーディング支援を受けています。
