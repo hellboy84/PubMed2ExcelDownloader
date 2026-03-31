@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>PubMed2ExcelDownloader 設定</title>
+<style>
+  :root {
+    --bg:           #f7f6f3;
+    --surface:      #ffffff;
+    --border:       #d8d5cf;
+    --text:         #2c2a25;
+    --text-muted:   #78756e;
+    --accent:       #1a6b4e;
+    --accent-light: #e8f5ee;
+    --accent-hover: #145a40;
+    --blue:         #2563b4;
+    --danger:       #c0392b;
+    --radius:       8px;
+    --shadow-sm:    0 1px 3px rgba(0,0,0,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    min-width: 360px;
+    max-width: 520px;
+    padding-bottom: 24px;
+  }
+
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  header svg { flex-shrink: 0; }
+
+  .form-wrap {
+    padding: 16px 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .field-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .required-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+  }
+
+  .optional-badge {
+    display: inline-block;
+    background: #888;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+  }
+
+  input[type="email"],
+  input[type="text"] {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  input[type="email"]:focus,
+  input[type="text"]:focus {
+    outline: 2px solid var(--accent);
+    border-color: transparent;
+  }
+
+  .help-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .help-text a {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+
+  .btn-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  button[type="submit"] {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover { background: var(--accent-hover); }
+
+  #save-status {
+    font-size: 12px;
+  }
+
+  #save-status.success { color: var(--accent); }
+  #save-status.error   { color: var(--danger); }
+</style>
+</head>
+<body>
+
+<header>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+  設定 / Settings
+</header>
+
+<form id="options-form" class="form-wrap">
+
+  <div class="field-group">
+    <label for="email">
+      メールアドレス<span class="required-badge">必須</span>
+    </label>
+    <input type="email" id="email" placeholder="your@email.com" autocomplete="email">
+    <p class="help-text">
+      <a href="https://www.ncbi.nlm.nih.gov/sites/books/NBK25497/#chapter2.Usage_Guidelines_and_Requiremen" target="_blank">PubMed(NCBI)の利用ガイドライン</a>により、APIリクエストにメールアドレスを含める必要があります。
+      メールアドレスはPubMed(NCBI)にのみ送信されます。
+    </p>
+  </div>
+
+  <div class="field-group">
+    <label for="apikey">
+      APIキー<span class="optional-badge">任意</span>
+    </label>
+    <input type="text" id="apikey" placeholder="32桁の英数字" autocomplete="off" spellcheck="false">
+    <p class="help-text">
+      設定するとリクエスト上限が 3回/秒 → 10回/秒 に緩和され、件数が多い場合のダウンロード速度が向上します。
+      <a href="https://www.ncbi.nlm.nih.gov/account/" target="_blank">My NCBI アカウント</a>から無料で取得できます。
+    </p>
+  </div>
+
+  <div class="btn-row">
+    <button type="submit">保存</button>
+    <span id="save-status" aria-live="polite"></span>
+  </div>
+
+</form>
+
+<script src="options.js"></script>
+</body>
+</html>

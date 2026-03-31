@@ -66,6 +66,33 @@
     border-left: 3px solid var(--danger);
   }
 
+  #status-area.warn {
+    color: var(--warn-color);
+    background: var(--warn-bg);
+    border-left: 3px solid var(--warn-border);
+  }
+
+  #status-area.warn a {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── ヘッダー歯車ボタン ── */
+  #open-options-btn {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  #open-options-btn:hover { color: #fff; background: rgba(255,255,255,0.15); }
+
   /* ── メインエリア ── */
   #main-area { padding: 0 0 4px; }
 
@@ -342,7 +369,13 @@
     <line x1="9" y1="13" x2="15" y2="13"/>
     <line x1="9" y1="17" x2="13" y2="17"/>
   </svg>
-  PubMed2ExcelDownloader
+  <span style="flex:1">PubMed2ExcelDownloader</span>
+  <button id="open-options-btn" title="設定" aria-label="設定を開く">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+  </button>
 </header>
 
 <!-- ステータスエリア（初期表示 / エラー） -->

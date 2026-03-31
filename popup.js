@@ -26,10 +26,22 @@ const encodingSelect   = document.getElementById('encoding');
 // ── 状態 ───────────────────────────────────────────────────────────────────
 let pageState = null;
 let abortController = null;
+let userSettings = { userEmail: null, apiKey: null };
 
 // ── 初期化 ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   buildFieldsGrid();
+
+  // ストレージから設定を読み込む
+  ext.storage.sync.get(['userEmail', 'apiKey'], (data) => {
+    userSettings.userEmail = data.userEmail || null;
+    userSettings.apiKey    = data.apiKey    || null;
+  });
+
+  // 設定ボタン
+  document.getElementById('open-options-btn').addEventListener('click', () => {
+    ext.runtime.openOptionsPage();
+  });
 
   // アクティブタブを取得
   let tab;
@@ -183,6 +195,21 @@ function updateProgress(done, total) {
 downloadBtn.addEventListener('click', async () => {
   resultArea.style.display = 'none';
 
+  // メールアドレス未設定チェック
+  if (!userSettings.userEmail) {
+    resultArea.className = 'warn';
+    resultArea.innerHTML =
+      'NCBIの要請によりメールアドレスの設定が必要です<br>' +
+      'メールアドレスはPubMed(NCBI)にのみ送られます<br>' +
+      '<a href="#" id="setup-link">設定を開く</a>';
+    resultArea.style.display = 'block';
+    document.getElementById('setup-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      ext.runtime.openOptionsPage();
+    });
+    return;
+  }
+
   const selected = getSelectedFields();
   if (selected.length === 0) {
     showResult('error', '少なくとも1つのフィールドを選択してください。');
@@ -220,10 +247,9 @@ downloadBtn.addEventListener('click', async () => {
 
   // 500件超の警告
   if (targetCount > 500) {
-    const minEst = Math.ceil((targetCount / 500) * 0.334 / 60);
     const confirmed = window.confirm(
       targetCount.toLocaleString() + '件のデータを取得します。\n' +
-      '取得に時間がかかります（目安: ' + minEst + '分前後）。\n' +
+      '取得に時間がかかる場合があります。\n' +
       '取得中はこのウィンドウを閉じないでください。\n\n続行しますか？'
     );
     if (!confirmed) return;
@@ -297,11 +323,13 @@ downloadBtn.addEventListener('click', async () => {
 // ── API ユーティリティ ────────────────────────────────────────────────────────
 
 function buildBaseParams() {
-  return new URLSearchParams({
+  const params = new URLSearchParams({
     db:    'pubmed',
     tool:  'pubmed2exceldownloader',
-    email: '8voldenuit4@gmail.com',
+    email: userSettings.userEmail,
   });
+  if (userSettings.apiKey) params.set('api_key', userSettings.apiKey);
+  return params;
 }
 
 /**
@@ -414,7 +442,7 @@ async function fetchBySearch(query, targetCount, signal) {
 
     updateProgress(Math.min(start + batchSize, fetchCount), fetchCount);
 
-    if (start + batchSize < fetchCount) await sleep(334);
+    if (start + batchSize < fetchCount) await sleep(userSettings.apiKey ? 100 : 334);
   }
 
   if (allRecords.length === 0) throw new Error('データの取得に失敗しました。');

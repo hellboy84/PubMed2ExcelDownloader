@@ -1,13 +1,19 @@
 {
   "manifest_version": 3,
   "name": "PubMed2ExcelDownloader",
-  "version": "1.0.7",
-  "description": "PubMed検索結果の書誌情報をExcel/CSVでダウンロードします。PubMed search results downloader: export bibliographic data (title, authors, journal, abstract, etc.) to Excel (.xlsx) or CSV with one click.",
+  "version": "2.0.0",
+  "description": "PubMed検索結果の書誌情報をExcel/CSVでダウンロードします。Export PubMed search results as Excel (.xlsx) or CSV.",
 
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ],
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
   "host_permissions": [
     "https://eutils.ncbi.nlm.nih.gov/*"
   ],
