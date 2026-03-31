@@ -2,12 +2,10 @@
 
 - **PubMed 検索結果を Excel/CSV でダウンロードするブラウザ拡張機能です。**
 PubMed の検索結果の一覧ページからボタン1つでファイルをダウンロードできます。
-  - PubMed(NCBI)の要請によりメールアドレスの設定が必要になりました(Ver.2以降)。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。本拡張機能はメールアドレスを収集しません。
-  - 節度ある利用にご協力下さい。
+  - PubMed(NCBI)の要請によりメールアドレスの設定が必要になりました(Ver.2以降)。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。本拡張機能はメールアドレスを収集しません。節度ある利用にご協力下さい。
 
 - **PubMed search results downloader**: export bibliographic data (title, authors, journal, abstract, etc.) to Excel (.xlsx) or CSV with one click.
-  - An email address is required by NCBI (v2+). Please configure it on first use — it is sent only to NCBI. This extension does not collect your email address.
-  - Please use this extension responsibly.
+  - An email address is required by NCBI (v2+). Please configure it on first use — it is sent only to NCBI. This extension does not collect your email address. Please use this extension responsibly.
 
 > **ファイルをPubMedからダウンロードして変換する HTML ツール版はこちら(HTML tool Version is here) →** [PubMed2ExcelConverter](https://github.com/hellboy84/PubMed2ExcelConverter)
 
@@ -56,7 +54,8 @@ PubMed の検索結果の一覧ページからボタン1つでファイルをダ
 6. **ダウンロード** ボタンをクリックする
 7. ダウンロードが完了するまでポップアップを閉じずに待つ
 
-> - PubMed(NCBI)の要請によりメールアドレスの設定が必要になりました(Ver.2以降)。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。本拡張機能はメールアドレスを収集しません。
+> - **PubMed(NCBI)の要請によりメールアドレスの設定が必要になりました(Ver.2以降)**。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。本拡張機能はメールアドレスを収集しません。
+> - https://pubmed.ncbi.nlm.nih.gov/?term=%231+AND+%233 のような，**履歴番号による検索結果URLからは情報を取得できません**(履歴にはアクセスできないため)。**履歴検索を使う場合は「Add query」を使って独立して成立する検索結果URLを生成してご利用下さい**。
 > - **件数が多い場合、取得に時間がかかります**。取得中はポップアップを閉じないでください。  
 
 ---
