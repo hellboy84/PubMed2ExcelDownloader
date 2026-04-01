@@ -1,6 +1,6 @@
 # PubMed2ExcelDownloader
 
-- **PubMed 検索結果を Excel/CSV でダウンロードするブラウザ拡張機能です。** PubMed の検索結果の一覧ページからボタン1つでファイルをダウンロードできます。
+- **PubMed 検索結果を Excel/CSV でダウンロードするブラウザ拡張機能です。** PubMed の検索結果の一覧ページからボタン1つでファイルをダウンロードできます。公式ストアからインストールできます。→ **[Chrome](https://chromewebstore.google.com/detail/aeinioilpppkblenhhmlmalbhddodoib?utm_source=item-share-cb)** / **Firefox(申請中)**
 
 - **PubMed search results downloader**: export bibliographic data (title, authors, journal, abstract, etc.) to Excel (.xlsx) or CSV with one click.
 
@@ -15,8 +15,8 @@
 
 <img width="800" alt="スクショ" src="https://github.com/user-attachments/assets/133a427e-cd1c-48fe-9408-4a078ced915c">
 
-- PubMed(NCBI)の要請によりVer.2以降はメールアドレスの設定が必要になりました。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。本拡張機能はメールアドレスを収集しません。
-- An email address is required by NCBI (v2+). Please configure it on first use — it is sent only to NCBI. This extension does not collect your email address. 
+- PubMed(NCBI)の要請によりVer.2以降はメールアドレスの設定が必要になりました。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。開発者はメールアドレスを収集しません。
+- An email address is required by NCBI (v2+). Please configure it on first use — it is sent only to NCBI. The developer does not collect your email address. 
 
 ---
 ## 公式ストア版のインストール方法
