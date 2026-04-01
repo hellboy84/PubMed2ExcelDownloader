@@ -21,7 +21,8 @@
 ---
 ## 公式ストア版のインストール方法
 
-- 登録申請中(Chrome / Firefox)
+- [Chromeの公式の拡張機能ストアからインストールできるようになりました](https://chromewebstore.google.com/detail/aeinioilpppkblenhhmlmalbhddodoib?utm_source=item-share-cb)(2026/04/01)
+- 登録申請中(Firefox)
 
 ## GitHub版のインストール方法
 
