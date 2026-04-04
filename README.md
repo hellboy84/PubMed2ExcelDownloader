@@ -1,6 +1,6 @@
 # PubMed2ExcelDownloader
 
-- **PubMed 検索結果を Excel/CSV でダウンロードするブラウザ拡張機能です。** PubMed の検索結果の一覧ページからボタン1つでファイルをダウンロードできます。公式ストアからインストールできます。→ **[Chrome](https://chromewebstore.google.com/detail/aeinioilpppkblenhhmlmalbhddodoib?utm_source=item-share-cb)** / **Firefox(申請中)**
+- **PubMed の検索結果を Excel/CSV でダウンロードするブラウザ拡張機能です。** PubMed の検索結果の一覧ページからボタン1つでファイルをダウンロードできます。各ブラウザの公式の拡張機能ストアからインストールできます。→ **[Chrome](https://chromewebstore.google.com/detail/aeinioilpppkblenhhmlmalbhddodoib?utm_source=item-share-cb)** / **[Firefox](https://addons.mozilla.org/ja/firefox/addon/pubmed2exceldownloader/)**
 
 - **PubMed search results downloader**: export bibliographic data (title, authors, journal, abstract, etc.) to Excel (.xlsx) or CSV with one click.
 
