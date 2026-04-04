@@ -15,7 +15,7 @@
 
 <img width="800" alt="スクショ" src="https://github.com/user-attachments/assets/133a427e-cd1c-48fe-9408-4a078ced915c">
 
-- PubMed(NCBI)の要請によりVer.2以降はメールアドレスの設定が必要になりました。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。開発者はメールアドレスを収集しません。
+- PubMed(NCBI)からの E-Utilities の利用ガイドライン (https://www.ncbi.nlm.nih.gov/sites/books/NBK25497/#chapter2.Usage_Guidelines_and_Requiremen) 遵守の要請により，Ver.2以降はメールアドレスの設定が必要になりました。初回利用時に本拡張機能内から設定をお願いします。メールアドレスはNCBIにのみ送られます。開発者はメールアドレスを収集しません。
 - An email address is required by NCBI (v2+). Please configure it on first use — it is sent only to NCBI. The developer does not collect your email address. 
 
 ---
