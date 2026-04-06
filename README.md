@@ -92,7 +92,7 @@
 
 ## プライバシーポリシー
 
-- 本拡張機能は、個人を特定できる情報を収集・使用・送信しません。
+- 開発者は、メールアドレス等の個人に関する一切の情報を収集しません。
 - そのほか詳細は[PRIVACY_POLICY.md](https://github.com/hellboy84/PubMed2ExcelDownloader/blob/main/PRIVACY_POLICY.md) を御覧ください。
 
 ## AI 利用

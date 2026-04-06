@@ -19,7 +19,7 @@ The developer does **not** collect any data. Specifically:
 - No search queries are transmitted to any server other than NCBI.
 - No analytics or telemetry are used.
 
-The following data is stored **locally in your browser** using `chrome.storage.local` and is never sent to the developer:
+The following data is stored **locally in your browser** and is never sent to the developer:
 
 | Data | Purpose |
 |---|---|
